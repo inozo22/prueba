@@ -124,12 +124,22 @@ void	list_books(void)
 	}
 }
 
-
-
-int	main(int ac, char **av)
+void	free_list(void)
 {
-	(void)ac, av;
-	printf("test without any data\n");
+	t_book	*current = head;
+
+	while (current != NULL)
+	{
+		t_book	*tmp = current;
+		current = current->next;
+		free (tmp);
+	}
+	head = NULL;
+}
+
+int	main(void)
+{
+	printf("test list_books without any data\n");
 	list_books();
 	add_book("test1", "test_author1", 1999);
 	add_book("AIYEO", "test_author2", 1999);
@@ -142,7 +152,7 @@ int	main(int ac, char **av)
 	remove_book("TEST1");
 	list_books();
 
-
+	free_list();
 
 	return 0;
 }
